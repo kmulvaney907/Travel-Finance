@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Vacation Decision">
+<meta name="theme-color" content="#0f1115">
+<title>Vacation Decision Worksheet</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --bg-elev: #161a21;
+    --bg-card: #1c2129;
+    --border: #2a3038;
+    --border-strong: #3a424d;
+    --text: #e8ebf0;
+    --text-dim: #9ba3b0;
+    --text-faint: #6b7280;
+    --accent: #c4965a;
+    --accent-dim: #8a6a3f;
+    --danger: #c4665a;
+    --success: #5a9d7a;
+    --safe-top: env(safe-area-inset-top);
+    --safe-bottom: env(safe-area-inset-bottom);
+    --safe-left: env(safe-area-inset-left);
+    --safe-right: env(safe-area-inset-right);
+  }
+
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 16px;
+    line-height: 1.55;
+    min-height: 100dvh;
+    padding-left: var(--safe-left);
+    padding-right: var(--safe-right);
+    overflow-x: hidden;
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: calc(var(--safe-top) + 20px) 18px calc(var(--safe-bottom) + 40px);
+  }
+
+  /* HEADER */
+  header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 22px;
+    margin-bottom: 28px;
+  }
+
+  .eyebrow {
+    font-family: -apple-system, sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+
+  h1 {
+    font-family: 'Georgia', serif;
+    font-size: 28px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+    margin: 0 0 12px;
+    color: var(--text);
+  }
+
+  .lede {
+    font-size: 15px;
+    color: var(--text-dim);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* PROGRESS */
+  .progress-wrap {
+    margin: 22px 0 8px;
+  }
+  .progress-bar {
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    width: 0%;
+    transition: width 0.35s ease;
+  }
+  .progress-text {
+    font-family: -apple-system, sans-serif;
+    font-size: 11px;
+    color: var(--text-faint);
+    margin-top: 8px;
+    letter-spacing: 0.05em;
+  }
+
+  /* SECTIONS */
+  section.block {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px 18px;
+    margin-bottom: 16px;
+  }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 6px;
+  }
+
+  .section-num {
+    font-family: 'Georgia', serif;
+    font-size: 13px;
+    font-style: italic;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  h2 {
+    font-family: 'Georgia', serif;
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: -0.005em;
+    margin: 0;
+    color: var(--text);
+  }
+
+  .section-sub {
+    font-size: 13px;
+    color: var(--text-faint);
+    margin: 4px 0 18px;
+    font-style: italic;
+  }
+
+  /* QUESTIONS */
+  .q {
+    margin-bottom: 18px;
+  }
+  .q:last-child { margin-bottom: 0; }
+
+  label {
+    display: block;
+    font-family: -apple-system, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+
+  .helper {
+    font-size: 12px;
+    color: var(--text-faint);
+    margin: -4px 0 8px;
+    font-style: italic;
+  }
+
+  /* INPUTS */
+  input[type="text"],
+  input[type="number"],
+  textarea,
+  select {
+    width: 100%;
+    background: var(--bg-elev);
+    border: 1px solid var(--border-strong);
+    border-radius: 8px;
+    padding: 12px 14px;
+    color: var(--text);
+    font-family: -apple-system, sans-serif;
+    font-size: 16px; /* prevents iOS zoom */
+    line-height: 1.4;
+    -webkit-appearance: none;
+    appearance: none;
+    transition: border-color 0.15s;
+  }
+
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+
+  textarea {
+    min-height: 88px;
+    resize: vertical;
+    font-family: 'Georgia', serif;
+  }
+
+  select {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path fill='%239ba3b0' d='M6 8L0 0h12z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+  }
+
+  /* SCALE BUTTONS */
+  .scale {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+  }
+  .scale button {
+    min-height: 48px;
+    background: var(--bg-elev);
+    border: 1px solid var(--border-strong);
+    border-radius: 8px;
+    color: var(--text-dim);
+    font-family: -apple-system, sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .scale button:active,
+  .scale button.selected {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+  }
+  .scale-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--text-faint);
+    margin-top: 6px;
+    font-family: -apple-system, sans-serif;
+  }
+
+  /* CHOICE BUTTONS */
+  .choices {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .choices button {
+    min-height: 48px;
+    text-align: left;
+    padding: 12px 14px;
+    background: var(--bg-elev);
+    border: 1px solid var(--border-strong);
+    border-radius: 8px;
+    color: var(--text-dim);
+    font-family: -apple-system, sans-serif;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .choices button:active,
+  .choices button.selected {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* CALC BOX */
+  .calc-box {
+    background: var(--bg-elev);
+    border: 1px dashed var(--border-strong);
+    border-radius: 8px;
+    padding: 14px;
+    margin-top: 14px;
+  }
+  .calc-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 6px 0;
+    font-family: -apple-system, sans-serif;
+    font-size: 14px;
+  }
+  .calc-row.total {
+    border-top: 1px solid var(--border-strong);
+    margin-top: 6px;
+    padding-top: 12px;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--accent);
+  }
+  .calc-label { color: var(--text-dim); }
+  .calc-val {
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+    font-weight: 500;
+  }
+
+  /* SCORECARD */
+  .scorecard {
+    background: linear-gradient(180deg, var(--bg-elev) 0%, var(--bg-card) 100%);
+    border: 1px solid var(--accent-dim);
+    border-radius: 12px;
+    padding: 24px 18px;
+    text-align: center;
+    margin-top: 8px;
+  }
+  .score-num {
+    font-family: 'Georgia', serif;
+    font-size: 56px;
+    font-weight: 400;
+    color: var(--accent);
+    line-height: 1;
+    margin: 8px 0;
+    font-variant-numeric: tabular-nums;
+  }
+  .score-label {
+    font-family: -apple-system, sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+  }
+  .score-verdict {
+    margin-top: 16px;
+    padding: 14px;
+    background: var(--bg-card);
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.5;
+    text-align: left;
+  }
+
+  /* ACTIONS */
+  .actions {
+    position: sticky;
+    bottom: 0;
+    background: linear-gradient(180deg, transparent 0%, var(--bg) 30%);
+    padding: 20px 0 calc(var(--safe-bottom) + 12px);
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 10;
+  }
+  .btn {
+    min-height: 52px;
+    width: 100%;
+    border-radius: 10px;
+    font-family: -apple-system, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.15s, transform 0.1s;
+  }
+  .btn:active { transform: scale(0.98); }
+  .btn-primary {
+    background: var(--accent);
+    color: var(--bg);
+  }
+  .btn-secondary {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border-strong);
+  }
+  .btn-danger {
+    background: transparent;
+    color: var(--danger);
+    border: 1px solid var(--border-strong);
+    font-size: 13px;
+    min-height: 40px;
+  }
+
+  /* CONTEXT CARD */
+  .context {
+    background: var(--bg-card);
+    border-left: 3px solid var(--accent);
+    border-radius: 4px;
+    padding: 14px 16px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+  .context strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* TOAST */
+  .toast {
+    position: fixed;
+    bottom: calc(var(--safe-bottom) + 100px);
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--accent);
+    color: var(--bg);
+    padding: 12px 20px;
+    border-radius: 24px;
+    font-family: -apple-system, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    opacity: 0;
+    transition: all 0.25s;
+    pointer-events: none;
+    z-index: 100;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  }
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* MODAL */
+  .modal-bg {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+    z-index: 50;
+    padding: 0;
+  }
+  .modal-bg.show { display: flex; }
+  .modal {
+    background: var(--bg-card);
+    border-radius: 16px 16px 0 0;
+    padding: 20px 18px calc(var(--safe-bottom) + 20px);
+    width: 100%;
+    max-width: 720px;
+    max-height: 85vh;
+    overflow-y: auto;
+    border: 1px solid var(--border-strong);
+    border-bottom: none;
+  }
+  .modal h3 {
+    font-family: 'Georgia', serif;
+    font-size: 20px;
+    font-weight: 400;
+    margin: 0 0 12px;
+  }
+  .modal-text {
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px;
+    font-family: 'SF Mono', Menlo, monospace;
+    font-size: 12px;
+    line-height: 1.55;
+    color: var(--text-dim);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    max-height: 40vh;
+    overflow-y: auto;
+    margin-bottom: 12px;
+  }
+
+  /* FOOTNOTE */
+  footer {
+    text-align: center;
+    font-family: -apple-system, sans-serif;
+    font-size: 11px;
+    color: var(--text-faint);
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    letter-spacing: 0.05em;
+  }
+
+  /* SMALL SCREENS */
+  @media (max-width: 380px) {
+    .container { padding-left: 14px; padding-right: 14px; }
+    h1 { font-size: 24px; }
+    .score-num { font-size: 48px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="eyebrow">A Worksheet for Two</div>
+    <h1>The Vacation Ownership Decision</h1>
+    <p class="lede">A structured conversation between you and Elizabeth. Answer together. Take your time. The math at the bottom is honest — even when it isn't pretty.</p>
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="progFill"></div></div>
+      <div class="progress-text" id="progText">0 of 38 answered</div>
+    </div>
+  </header>
+
+  <!-- CONTEXT (PRE-FILLED FROM CONVERSATION) -->
+  <div class="context">
+    <strong>Your current ownership baseline:</strong><br>
+    Ocean Tower, Big Island Hawaii · 7,860 points EOY · $1,840 maintenance (on use years) · $340 annual club fee · Typical use: 1 family + 1 couples trip/year · Hawaii is your #1, with occasional NY/MA trips · Kids: 19, 16, 12.
+  </div>
+
+  <!-- SECTION 1: USAGE REALITY -->
+  <section class="block">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <h2>Usage Reality</h2>
+    </div>
+    <p class="section-sub">What actually happens, not what we imagine.</p>
+
+    <div class="q">
+      <label>How many vacations do we realistically take per year (avg over last 3 years)?</label>
+      <input type="number" inputmode="decimal" id="q1_1" placeholder="e.g., 2.5">
+    </div>
+
+    <div class="q">
+      <label>How many of those do we actually want tied to HGV?</label>
+      <input type="number" inputmode="decimal" id="q1_2" placeholder="e.g., 1.5">
+    </div>
+
+    <div class="q">
+      <label>Are we consistently unable to take trips because of limited points?</label>
+      <div class="choices" data-name="q1_3">
+        <button data-val="never">Never — points usually cover what we want</button>
+        <button data-val="rarely">Rarely — once every few years</button>
+        <button data-val="sometimes">Sometimes — feels limiting</button>
+        <button data-val="often">Often — we feel constrained</button>
+      </div>
+    </div>
+
+    <div class="q">
+      <label>Are we struggling to book what we want right now?</label>
+      <div class="choices" data-name="q1_4">
+        <button data-val="no">No — bookings have been smooth</button>
+        <button data-val="sometimes">Sometimes — date/unit conflicts</button>
+        <button data-val="yes">Yes — frustrated regularly</button>
+      </div>
+    </div>
+
+    <div class="q">
+      <label>Satisfaction with the quality of trips we currently take (1 = poor, 5 = excellent)</label>
+      <div class="scale" data-name="q1_5" data-type="scale">
+        <button data-val="1">1</button><button data-val="2">2</button><button data-val="3">3</button><button data-val="4">4</button><button data-val="5">5</button>
+      </div>
+      <div class="scale-labels"><span>Disappointed</span><span>Excellent</span></div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: HAWAII PRIORITY -->
+  <section class="block">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <h2>Hawaii Priority</h2>
+    </div>
+    <p class="section-sub">It's #1 today. Will it be #1 in 2040?</p>
+
+    <div class="q">
+      <label>How important is Hawaii to us, long term? (1 = nice but optional, 5 = non-negotiable)</label>
+      <div class="scale" data-name="q2_1" data-type="scale">
+        <button data-val="1">1</button><button data-val="2">2</button><button data-val="3">3</button><button data-val="4">4</button><button data-val="5">5</button>
+      </div>
+    </div>
+
+    <div class="q">
+      <label>Do we realistically see ourselves vacationing in Hawaii 10–20 years from now?</label>
+      <div class="choices" data-name="q2_2">
+        <button data-val="definitely">Definitely — it's our forever spot</button>
+        <button data-val="probably">Probably — but we'd want variety too</button>
+        <button data-val="unsure">Unsure — depends on kids/health/budget</button>
+        <button data-val="unlikely">Unlikely — interests will shift</button>
+      </div>
+    </div>
+
+    <div class="q">
+      <label>With kids at 19, 16, and 12 — will travel habits change in the next 5 years?</label>
+      <p class="helper">19 may not travel with you much longer. 16 will soon be the same. 12 has maybe 6 family-vacation years left.</p>
+      <textarea id="q2_3" placeholder="Honest answer — what does the next 5 years actually look like?"></textarea>
+    </div>
+
+    <div class="q">
+      <label>Would we regret being financially tied to one vacation style?</label>
+      <div class="choices" data-name="q2_4">
+        <button data-val="no">No — we love what we love</button>
+        <button data-val="maybe">Maybe — it's a real concern</button>
+        <button data-val="yes">Yes — we want options</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: FLEXIBILITY VS CERTAINTY -->
+  <section class="block">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <h2>Flexibility vs. Certainty</h2>
+    </div>
+    <p class="section-sub">Two different relationships with travel.</p>
+
+    <div class="q">
+      <label>Which do we value more?</label>
+      <div class="choices" data-name="q3_1">
+        <button data-val="flex">Flexibility — go where/when we want</button>
+        <button data-val="balanced">Balanced — both matter</button>
+        <button data-val="cert">Certainty — guaranteed resort access</button>
+      </div>
+    </div>
+
+    <div class="q">
+      <label>Are we comfortable booking flights/hotels independently?</label>
+      <div class="choices" data-name="q3_2">
+        <button data-val="yes">Yes — we do it well</button>
+        <button data-val="okay">Okay — but it's work</button>
+        <button data-val="no">No — we prefer the system</button>
+      </div>
+    </div>
+
+    <div class="q">
+      <label>Do we enjoy finding deals outside the HGV system?</label>
+      <div class="choices" data-name="q3_3">
+        <button data-val="love">Love it — it's part of the fun</button>
+        <button data-val="okay">Don't mind it</button>
+        <button data-val="dislike">Dislike it — too time-consuming</button>
+      </div>
+    </div>
+
+    <div class="q">
+      <label>Would higher annual obligations reduce our travel flexibility overall?</label>
+      <div class="choices" data-name="q3_4">
+        <button data-val="yes">Yes — we'd feel locked in</button>
+        <button data-val="maybe">Maybe — depends on the amount</button>
+        <button data-val="no">No — wouldn't matter</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: FINANCIAL REALITY -->
+  <section class="block">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <h2>Financial Reality</h2>
+    </div>
+    <p class="section-sub">Numbers don't lie. They also don't get embarrassed.</p>
+
+    <div class="q">
+      <label>Current annual maintenance fee (your EOY year)</label>
+      <input type="number" inputmode="decimal" id="q4_1" placeholder="1840" value="1840">
+    </div>
+
+    <div class="q">
+      <label>Annual club fee</label>
+      <input type="number" inputmode="decimal" id="q4_2" placeholder="340" value="340">
+    </div>
+
+    <div class="q">
+      <label>What annual fee level would start feeling uncomfortable?</label>
+      <input type="number" inputmode="decimal" id="q4_3" placeholder="e.g., 3500">
+    </div>
+
+    <div class="q">
+      <label>How would we feel if maintenance fees doubled over 15–20 years?</label>
+      <p class="helper">Historical timeshare maintenance fee growth has typically averaged 4–6% annually. Verify with your own HGV statements.</p>
+      <div class="choices" data-name="q4_4">
+        <button data-val="fine">Fine — we'd absorb it</button>
+        <button data-val="tight">Tight — we'd feel it</button>
+        <button data-val="stress">Stressful — could be a problem</button>
+      </div>
+    </div>
+
+    <div class="q">
+      <label>Would higher annual obligations create stress during difficult financial years?</label>
+      <div class="choices" data-name="q4_5">
+        <button data-val="no">No — we have ample buffer</button>
+        <button data-val="some">Some — manageable but uncomfortable</button>
+        <button data-val="yes">Yes — real concern</button>
+      </div>
+    </div>
+
+    <div class="q">
+      <label>Would we rather invest the extra travel money elsewhere?</label>
+      <div class="choices" data-name="q4_6">
+        <button data-val="yes">Yes — investing wins long-term</button>
+        <button data-val="split">Split — some travel, some invest</button>
+        <button data-val="no">No — travel is the goal</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: ACTUAL POINT NEED -->
+  <section class="block">
+    <div class="section-head">
+      <span class="section-num">05</span>
+      <h2>Actual Point Need</h2>
+    </div>
+    <p class="section-sub">Need vs. consumption — they look identical from inside the sales room.</p>
+
+    <div class="q">
+      <label>Are we routinely running out of points?</label>
+      <div class="choices" data-name="q5_1">
+        <button data-val="no">No — usually have leftover</button>
+        <button data-val="even">Even — use about what we have</button>
+        <button data-val="short">Short — want more</button>
+      </div>
+    </div>
+
+    <div class="q">
+      <label>Are we constantly borrowing or banking points?</label>
+      <div class="choices" data-name="q5_2">
+        <button data-val="no">No — straightforward usage</button>
+        <button data-val="some">Some — occasional juggling</button>
+        <button data-val="often">Often — feels like a puzzle</button>
+      </div>
+    </div>
+
+    <div class="q">
+      <label>Are we sacrificing desired trips because of low point availability?</label>
+      <div class="choices" data-name="q5_3">
+        <button data-val="never">Never</button>
+        <button data-val="rarely">Rarely</button>
+        <button data-val="sometimes">Sometimes</button>
+        <button data-val="often">Often</button>
+      </div>
+    </div>
+
+    <div class="q">
+      <label>Would additional points genuinely improve our lifestyle — or just increase consumption?</label>
+      <div class="choices" data-name="q5_4">
+        <button data-val="improve">Genuinely improve it</button>
+        <button data-val="unsure">Honestly unsure</button>
+        <button data-val="consume">Just more consumption</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6: FAMILY PLANNING -->
+  <section class="block">
+    <div class="section-head">
+      <span class="section-num">06</span>
+      <h2>Family Planning</h2>
+    </div>
+    <p class="section-sub">The kids' ages are the loudest variable in this decision.</p>
+
+    <div class="q">
+      <label>How many more years do we realistically expect consistent family vacations (with all kids)?</label>
+      <p class="helper">Be honest: 19 may be out soon. 16 in ~2–4 years. 12 in maybe 6 years. Reality, not hope.</p>
+      <input type="number" inputmode="decimal" id="q6_1" placeholder="e.g., 5">
+    </div>
+
+    <div class="q">
+      <label>As kids age out, how do we expect our travel to change?</label>
+      <textarea id="q6_2" placeholder="Couples-only? Multi-gen with grown kids + future grandkids? Different destinations? Different style?"></textarea>
+    </div>
+
+    <div class="q">
+      <label>Are we buying for our current phase of life — or assuming today lasts forever?</label>
+      <div class="choices" data-name="q6_3">
+        <button data-val="current">Current phase (and that's fine)</button>
+        <button data-val="future">Planning for a different future phase</button>
+        <button data-val="forever">Honestly... assuming today lasts</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 7: EMOTIONAL VS PRACTICAL -->
+  <section class="block">
+    <div class="section-head">
+      <span class="section-num">07</span>
+      <h2>Emotional vs. Practical</h2>
+    </div>
+    <p class="section-sub">No shame in being moved. Just name it out loud.</p>
+
+    <div class="q">
+      <label>Which of these are pulling on us right now? (Pick all that apply)</label>
+      <p class="helper">Tap each that resonates. Multi-select.</p>
+      <div class="choices multi" data-name="q7_pulls">
+        <button data-val="luxury">Luxury imagery</button>
+        <button data-val="status">Status / belonging</button>
+        <button data-val="elite">Elite tier benefits</button>
+        <button data-val="deal">"Special deal" / urgency</button>
+        <button data-val="exclusivity">Exclusivity</button>
+        <button data-val="momentum">Emotional vacation momentum (we're here, in the mode)</button>
+      </div>
+    </div>
+
+    <div class="q">
+      <label>Or — are we solving an actual recurring problem?</label>
+      <textarea id="q7_problem" placeholder="If yes, what is the specific, repeatable problem more ownership solves?"></textarea>
+    </div>
+  </section>
+
+  <!-- SECTION 8: STRESS TEST -->
+  <section class="block">
+    <div class="section-head">
+      <span class="section-num">08</span>
+      <h2>Ownership Stress Test</h2>
+    </div>
+    <p class="section-sub">Imagine the unfavorable scenario. Sit with it.</p>
+
+    <div class="q">
+      <label>Picture: fees up significantly, booking harder, priorities shifted, airfare expensive, money tighter. Would we still feel good owning more?</label>
+      <div class="choices" data-name="q8_1">
+        <button data-val="yes">Yes — we'd still feel good</button>
+        <button data-val="ok">Okay — but with some regret</button>
+        <button data-val="no">No — we'd feel trapped</button>
+      </div>
+    </div>
+
+    <div class="q">
+      <label>If we needed to exit in 5 years, what do we estimate we'd actually recover?</label>
+      <p class="helper">Timeshare resale markets are notoriously weak. Many HGV deeds resell for a small fraction of retail; some owners pay to transfer out. Verify on resale sites before assuming.</p>
+      <div class="choices" data-name="q8_2">
+        <button data-val="most">Most of what we paid</button>
+        <button data-val="half">About half</button>
+        <button data-val="little">A small fraction</button>
+        <button data-val="zero">Effectively nothing</button>
+        <button data-val="unknown">Honestly don't know</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 9: CURRENT SATISFACTION AUDIT -->
+  <section class="block">
+    <div class="section-head">
+      <span class="section-num">09</span>
+      <h2>Current Satisfaction Audit</h2>
+    </div>
+    <p class="section-sub">The cheapest upgrade is realizing we don't need one.</p>
+
+    <div class="q">
+      <label>Are we unhappy with our current ownership?</label>
+      <div class="scale" data-name="q9_1" data-type="scale">
+        <button data-val="1">1</button><button data-val="2">2</button><button data-val="3">3</button><button data-val="4">4</button><button data-val="5">5</button>
+      </div>
+      <div class="scale-labels"><span>Very happy</span><span>Very unhappy</span></div>
+    </div>
+
+    <div class="q">
+      <label>Does our current structure already accomplish most of what we want?</label>
+      <div class="choices" data-name="q9_2">
+        <button data-val="yes">Yes — it largely works</button>
+        <button data-val="mostly">Mostly — minor gaps</button>
+        <button data-val="no">No — real shortfall</button>
+      </div>
+    </div>
+
+    <div class="q">
+      <label>Are we feeling pressure today because of a sales environment, or because we genuinely need more ownership?</label>
+      <div class="choices" data-name="q9_3">
+        <button data-val="env">Sales environment / emotional activation</button>
+        <button data-val="mix">Honestly a mix</button>
+        <button data-val="real">Real, pre-existing need</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 10: THE PROPOSED UPGRADE (math) -->
+  <section class="block">
+    <div class="section-head">
+      <span class="section-num">10</span>
+      <h2>The Proposed Upgrade — Math</h2>
+    </div>
+    <p class="section-sub">Fill in whatever they pitched (or pitch in the future). Math is automatic.</p>
+
+    <div class="q">
+      <label>Upfront cost of the proposed upgrade ($)</label>
+      <input type="number" inputmode="decimal" id="q10_cost" placeholder="e.g., 45000" oninput="calcMath()">
+    </div>
+
+    <div class="q">
+      <label>New TOTAL annual maintenance + club fees if we upgrade ($)</label>
+      <input type="number" inputmode="decimal" id="q10_newfee" placeholder="e.g., 4200" oninput="calcMath()">
+    </div>
+
+    <div class="q">
+      <label>Additional points the upgrade provides</label>
+      <input type="number" inputmode="decimal" id="q10_pts" placeholder="e.g., 5000" oninput="calcMath()">
+    </div>
+
+    <div class="q">
+      <label>Years we expect to actively use this (be honest with kids' ages)</label>
+      <input type="number" inputmode="decimal" id="q10_years" placeholder="e.g., 15" value="15" oninput="calcMath()">
+    </div>
+
+    <div class="q">
+      <label>Assumed annual fee inflation (%)</label>
+      <p class="helper">Timeshare fees have historically often risen faster than general inflation. Verify with your own HGV history.</p>
+      <input type="number" inputmode="decimal" id="q10_infl" placeholder="5" value="5" oninput="calcMath()">
+    </div>
+
+    <div class="calc-box">
+      <div class="calc-row">
+        <span class="calc-label">Current annual cost</span>
+        <span class="calc-val" id="m_current">—</span>
+      </div>
+      <div class="calc-row">
+        <span class="calc-label">New annual cost (year 1)</span>
+        <span class="calc-val" id="m_new">—</span>
+      </div>
+      <div class="calc-row">
+        <span class="calc-label">Annual increase</span>
+        <span class="calc-val" id="m_diff">—</span>
+      </div>
+      <div class="calc-row">
+        <span class="calc-label">Sum of all fees over use period (with inflation)</span>
+        <span class="calc-val" id="m_lifefees">—</span>
+      </div>
+      <div class="calc-row">
+        <span class="calc-label">+ Upfront cost</span>
+        <span class="calc-val" id="m_upfront">—</span>
+      </div>
+      <div class="calc-row total">
+        <span class="calc-label">TOTAL lifetime cost of decision</span>
+        <span class="calc-val" id="m_total">—</span>
+      </div>
+      <div class="calc-row">
+        <span class="calc-label">Cost per added point per year</span>
+        <span class="calc-val" id="m_ppp">—</span>
+      </div>
+      <div class="calc-row">
+        <span class="calc-label">Opportunity cost if invested @ 7% instead</span>
+        <span class="calc-val" id="m_opp">—</span>
+      </div>
+    </div>
+
+    <p class="helper" style="margin-top:14px">All math is educational. Verify every assumption with your actual HGV contract, fee history, and a financial advisor. This worksheet is not financial advice.</p>
+  </section>
+
+  <!-- DECISION SCORECARD -->
+  <section class="block">
+    <div class="section-head">
+      <span class="section-num">⌘</span>
+      <h2>Decision Filter</h2>
+    </div>
+    <p class="section-sub">The one question the room is designed to make you forget.</p>
+
+    <div class="q">
+      <label>If no salesperson existed and no presentation occurred — would we independently wake up tomorrow wanting to buy more HGV ownership?</label>
+      <div class="choices" data-name="qfinal">
+        <button data-val="yes">Yes — clearly</button>
+        <button data-val="leaning">Leaning yes</button>
+        <button data-val="unsure">Honestly unsure</button>
+        <button data-val="leaning_no">Leaning no</button>
+        <button data-val="no">No — definitely not</button>
+      </div>
+    </div>
+
+    <div class="q">
+      <label>Anything else we want to capture before we decide?</label>
+      <textarea id="qnotes" placeholder="Open notes — concerns, hopes, things to verify..."></textarea>
+    </div>
+
+    <div class="scorecard">
+      <div class="score-label">Decision Signal</div>
+      <div class="score-num" id="scoreNum">—</div>
+      <div class="score-label" id="scoreLabel">Complete the worksheet</div>
+      <div class="score-verdict" id="scoreVerdict">A score will appear here as you answer. It's a heuristic — not a verdict. The conversation between you and Elizabeth is what matters.</div>
+    </div>
+  </section>
+
+  <!-- ACTIONS -->
+  <div class="actions">
+    <button class="btn btn-primary" onclick="showSummary()">View Summary &amp; Export</button>
+    <button class="btn btn-secondary" onclick="saveData(true)">Save Progress</button>
+    <button class="btn btn-danger" onclick="confirmReset()">Reset All Answers</button>
+  </div>
+
+  <footer>
+    Not financial advice. Verify all numbers with your HGV contract and a qualified advisor.
+  </footer>
+
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- SUMMARY MODAL -->
+<div class="modal-bg" id="modalBg" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <h3>Summary for AI Analysis</h3>
+    <p style="font-size:13px;color:var(--text-dim);margin:0 0 12px">Copy this block and paste into a fresh chat with Claude (or any AI) for a deeper breakdown.</p>
+    <div class="modal-text" id="summaryText"></div>
+    <button class="btn btn-primary" onclick="copySummary()">Copy to Clipboard</button>
+    <button class="btn btn-secondary" onclick="downloadJSON()" style="margin-top:8px">Download JSON Backup</button>
+    <button class="btn btn-secondary" onclick="closeModal()" style="margin-top:8px">Close</button>
+  </div>
+</div>
+
+<script>
+const STORAGE_KEY = 'vacation_decision_v1';
+const state = {};
+
+// ---- BUTTON GROUPS (single + multi) ----
+document.querySelectorAll('.choices, .scale').forEach(group => {
+  const name = group.dataset.name;
+  const isMulti = group.classList.contains('multi');
+  group.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const val = btn.dataset.val;
+      if (isMulti) {
+        const cur = state[name] || [];
+        const idx = cur.indexOf(val);
+        if (idx >= 0) cur.splice(idx, 1);
+        else cur.push(val);
+        state[name] = cur;
+        btn.classList.toggle('selected');
+      } else {
+        group.querySelectorAll('button').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        state[name] = val;
+      }
+      saveData();
+      updateProgress();
+      updateScore();
+    });
+  });
+});
+
+// ---- TEXT/NUMBER INPUTS ----
+document.querySelectorAll('input[type="text"], input[type="number"], textarea').forEach(el => {
+  el.addEventListener('input', () => {
+    state[el.id] = el.value;
+    saveData();
+    updateProgress();
+    updateScore();
+  });
+});
+
+// ---- PROGRESS ----
+function countAnswered() {
+  const fields = [
+    'q1_1','q1_2','q1_3','q1_4','q1_5',
+    'q2_1','q2_2','q2_3','q2_4',
+    'q3_1','q3_2','q3_3','q3_4',
+    'q4_1','q4_2','q4_3','q4_4','q4_5','q4_6',
+    'q5_1','q5_2','q5_3','q5_4',
+    'q6_1','q6_2','q6_3',
+    'q7_pulls','q7_problem',
+    'q8_1','q8_2',
+    'q9_1','q9_2','q9_3',
+    'q10_cost','q10_newfee','q10_pts',
+    'qfinal','qnotes'
+  ];
+  let answered = 0;
+  fields.forEach(f => {
+    const v = state[f];
+    if (Array.isArray(v) ? v.length > 0 : (v !== undefined && v !== '' && v !== null)) answered++;
+  });
+  return { answered, total: fields.length };
+}
+
+function updateProgress() {
+  const { answered, total } = countAnswered();
+  const pct = (answered / total) * 100;
+  document.getElementById('progFill').style.width = pct + '%';
+  document.getElementById('progText').textContent = `${answered} of ${total} answered`;
+}
+
+// ---- MATH ----
+function fmt(n) {
+  if (!isFinite(n) || n === 0) return '—';
+  return '$' + Math.round(n).toLocaleString();
+}
+
+function calcMath() {
+  const curMaint = parseFloat(state.q4_1) || 1840;
+  const curClub = parseFloat(state.q4_2) || 340;
+  const currentAnnual = curMaint + curClub;
+
+  const cost = parseFloat(state.q10_cost) || 0;
+  const newFee = parseFloat(state.q10_newfee) || 0;
+  const pts = parseFloat(state.q10_pts) || 0;
+  const years = parseFloat(state.q10_years) || 15;
+  const infl = (parseFloat(state.q10_infl) || 5) / 100;
+
+  const diff = newFee - currentAnnual;
+
+  // Sum of fees over years with inflation (full new fee, since they'd pay it all)
+  let lifeFees = 0;
+  for (let y = 0; y < years; y++) {
+    lifeFees += newFee * Math.pow(1 + infl, y);
+  }
+
+  const total = lifeFees + cost;
+  const ppp = (pts > 0 && years > 0) ? (cost / pts / years) : 0;
+
+  // Opportunity cost: if you invested upfront + annual difference at 7%
+  let opp = 0;
+  if (cost > 0) {
+    // FV of upfront
+    opp += cost * Math.pow(1.07, years);
+    // FV of annual extra contributions (the difference between new and current fee, treated as foregone savings)
+    if (diff > 0) {
+      for (let y = 0; y < years; y++) {
+        opp += diff * Math.pow(1 + infl, y) * Math.pow(1.07, years - y);
+      }
+    }
+  }
+
+  document.getElementById('m_current').textContent = fmt(currentAnnual);
+  document.getElementById('m_new').textContent = fmt(newFee);
+  document.getElementById('m_diff').textContent = diff > 0 ? '+' + fmt(diff).replace('$','$') : (diff < 0 ? fmt(diff) : '—');
+  document.getElementById('m_lifefees').textContent = fmt(lifeFees);
+  document.getElementById('m_upfront').textContent = fmt(cost);
+  document.getElementById('m_total').textContent = fmt(total);
+  document.getElementById('m_ppp').textContent = ppp > 0 ? '$' + ppp.toFixed(3) + ' / pt / yr' : '—';
+  document.getElementById('m_opp').textContent = fmt(opp);
+}
+
+// ---- SCORECARD ----
+function updateScore() {
+  // Heuristic scoring: higher score = stronger signal to buy more
+  // Lower score = stronger signal to pause/decline
+  let score = 50; // neutral start
+  let factors = [];
+
+  // Section 1: usage
+  if (state.q1_3 === 'often') { score += 6; factors.push('Often constrained by points'); }
+  if (state.q1_3 === 'never') { score -= 6; factors.push('Points usually cover needs'); }
+  if (state.q1_4 === 'yes') score += 4;
+  if (state.q1_4 === 'no') score -= 3;
+  if (state.q1_5 === '5') { score -= 4; factors.push('Already very satisfied with current trips'); }
+  if (state.q1_5 === '1' || state.q1_5 === '2') score += 3;
+
+  // Section 2: Hawaii long-term
+  if (state.q2_1 === '5') score += 4;
+  if (state.q2_1 === '1' || state.q2_1 === '2') score -= 5;
+  if (state.q2_2 === 'definitely') score += 5;
+  if (state.q2_2 === 'unlikely') { score -= 8; factors.push('Hawaii commitment uncertain long-term'); }
+  if (state.q2_4 === 'yes') { score -= 6; factors.push('Would regret being locked in'); }
+
+  // Section 3: flexibility
+  if (state.q3_1 === 'flex') { score -= 5; factors.push('Value flexibility over certainty'); }
+  if (state.q3_1 === 'cert') score += 5;
+  if (state.q3_4 === 'yes') score -= 4;
+
+  // Section 4: financial
+  if (state.q4_4 === 'stress') { score -= 8; factors.push('Fee doubling would cause stress'); }
+  if (state.q4_4 === 'fine') score += 3;
+  if (state.q4_5 === 'yes') { score -= 6; factors.push('Concern about hard financial years'); }
+  if (state.q4_6 === 'yes') { score -= 6; factors.push('Prefer to invest the money elsewhere'); }
+  if (state.q4_6 === 'no') score += 3;
+
+  // Section 5: point need
+  if (state.q5_1 === 'short') score += 5;
+  if (state.q5_1 === 'no') { score -= 5; factors.push('Routinely have leftover points'); }
+  if (state.q5_4 === 'improve') score += 6;
+  if (state.q5_4 === 'consume') { score -= 8; factors.push('More points would just mean more consumption'); }
+
+  // Section 6: family
+  const familyYears = parseFloat(state.q6_1) || 0;
+  if (familyYears > 0 && familyYears < 5) { score -= 6; factors.push('Family-trip window is short'); }
+  if (state.q6_3 === 'forever') { score -= 5; factors.push('Risk of assuming today lasts forever'); }
+  if (state.q6_3 === 'future') score += 2;
+
+  // Section 7: emotional pulls
+  const pulls = state.q7_pulls || [];
+  if (pulls.length >= 3) { score -= 6; factors.push('Multiple emotional pulls active'); }
+  if (pulls.includes('momentum')) { score -= 4; factors.push('Vacation momentum is a factor'); }
+  if (pulls.includes('deal')) { score -= 3; factors.push('"Deal" urgency is a factor'); }
+
+  // Section 8: stress test
+  if (state.q8_1 === 'no') { score -= 8; factors.push('Would feel trapped in stress scenario'); }
+  if (state.q8_1 === 'yes') score += 4;
+  if (state.q8_2 === 'little' || state.q8_2 === 'zero') { score -= 3; factors.push('Aware exit value is poor'); }
+
+  // Section 9: audit
+  if (state.q9_2 === 'yes') { score -= 5; factors.push('Current structure already works'); }
+  if (state.q9_2 === 'no') score += 5;
+  if (state.q9_3 === 'env') { score -= 8; factors.push('Pressure source: sales environment'); }
+  if (state.q9_3 === 'real') score += 6;
+
+  // Final filter
+  if (state.qfinal === 'yes') score += 12;
+  if (state.qfinal === 'leaning') score += 5;
+  if (state.qfinal === 'unsure') score -= 4;
+  if (state.qfinal === 'leaning_no') score -= 10;
+  if (state.qfinal === 'no') { score -= 18; factors.push('Cold-light answer: no'); }
+
+  score = Math.max(0, Math.min(100, score));
+
+  const { answered, total } = countAnswered();
+  if (answered < 10) {
+    document.getElementById('scoreNum').textContent = '—';
+    document.getElementById('scoreLabel').textContent = 'Keep going';
+    document.getElementById('scoreVerdict').textContent = 'A score will appear here as you answer. It\'s a heuristic — not a verdict.';
+    return;
+  }
+
+  document.getElementById('scoreNum').textContent = score;
+
+  let label, verdict;
+  if (score >= 70) {
+    label = 'Signal: Lean Yes';
+    verdict = 'Your answers lean toward this being a genuine fit. Before any purchase: sleep on it, get the full contract in writing, verify all fee/inflation assumptions against your actual HGV statements, and confirm exit/resale realities. A strong "yes" should survive 72 hours away from the sales environment.';
+  } else if (score >= 50) {
+    label = 'Signal: Mixed';
+    verdict = 'Roughly balanced. This usually means the decision is being driven by something other than clear need — often emotional momentum or selective framing. The default in mixed signal is almost always: don\'t buy today. Walk away, revisit in 30 days with no salesperson present.';
+  } else if (score >= 30) {
+    label = 'Signal: Lean No';
+    verdict = 'Multiple honest answers point away from this purchase. Your current ownership likely covers most real needs. Walking away costs nothing; buying and regretting is expensive and hard to undo.';
+  } else {
+    label = 'Signal: Clear No';
+    verdict = 'The pattern is consistent: this purchase does not fit your actual life. Whatever urgency the presentation created is manufactured. Decline cleanly. The offer — or one like it — will exist again.';
+  }
+
+  document.getElementById('scoreLabel').textContent = label;
+
+  let factorText = factors.length ? '\n\nKey factors influencing this signal:\n• ' + factors.slice(0, 6).join('\n• ') : '';
+  document.getElementById('scoreVerdict').textContent = verdict + factorText;
+}
+
+// ---- SAVE / LOAD ----
+function saveData(notify = false) {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    if (notify) showToast('Progress saved');
+  } catch (e) {
+    if (notify) showToast('Save failed');
+  }
+}
+
+function loadData() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (!saved) return;
+    const data = JSON.parse(saved);
+    Object.assign(state, data);
+
+    // Restore inputs
+    document.querySelectorAll('input, textarea').forEach(el => {
+      if (state[el.id] !== undefined) el.value = state[el.id];
+    });
+
+    // Restore buttons
+    document.querySelectorAll('.choices, .scale').forEach(group => {
+      const name = group.dataset.name;
+      const val = state[name];
+      if (!val) return;
+      if (Array.isArray(val)) {
+        group.querySelectorAll('button').forEach(b => {
+          if (val.includes(b.dataset.val)) b.classList.add('selected');
+        });
+      } else {
+        group.querySelectorAll('button').forEach(b => {
+          if (b.dataset.val === val) b.classList.add('selected');
+        });
+      }
+    });
+
+    calcMath();
+    updateProgress();
+    updateScore();
+  } catch (e) { console.warn('Load failed', e); }
+}
+
+// ---- TOAST ----
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 1800);
+}
+
+// ---- RESET ----
+function confirmReset() {
+  if (confirm('Erase all answers? This cannot be undone.')) {
+    localStorage.removeItem(STORAGE_KEY);
+    location.reload();
+  }
+}
+
+// ---- SUMMARY EXPORT ----
+function buildSummary() {
+  const labels = {
+    q1_1: 'Realistic vacations/year',
+    q1_2: 'Want tied to HGV',
+    q1_3: 'Unable to take trips (points limit)',
+    q1_4: 'Struggling to book now',
+    q1_5: 'Trip quality satisfaction (1–5)',
+    q2_1: 'Hawaii long-term importance (1–5)',
+    q2_2: 'Hawaii in 10–20 years',
+    q2_3: 'Travel habit changes (5yr)',
+    q2_4: 'Regret being locked in?',
+    q3_1: 'Flexibility vs certainty',
+    q3_2: 'Comfortable booking independently',
+    q3_3: 'Enjoy deals outside HGV',
+    q3_4: 'Higher obligations reduce flex?',
+    q4_1: 'Current maintenance ($)',
+    q4_2: 'Current club fee ($)',
+    q4_3: 'Uncomfortable fee threshold ($)',
+    q4_4: 'Reaction if fees doubled',
+    q4_5: 'Stress in hard financial years',
+    q4_6: 'Invest extra elsewhere?',
+    q5_1: 'Running out of points',
+    q5_2: 'Constant borrow/bank',
+    q5_3: 'Sacrificing trips for points',
+    q5_4: 'Additional points: improve or consume',
+    q6_1: 'Years of consistent family vacations',
+    q6_2: 'How travel changes as kids age',
+    q6_3: 'Buying for phase or "forever"',
+    q7_pulls: 'Emotional pulls active',
+    q7_problem: 'Actual recurring problem',
+    q8_1: 'Stress test: still feel good?',
+    q8_2: 'Estimated 5yr exit recovery',
+    q9_1: 'Unhappy with current ownership (1=happy, 5=unhappy)',
+    q9_2: 'Current structure works?',
+    q9_3: 'Pressure source',
+    q10_cost: 'Proposed upgrade upfront cost ($)',
+    q10_newfee: 'New total annual fees ($)',
+    q10_pts: 'Added points',
+    q10_years: 'Expected years of use',
+    q10_infl: 'Assumed annual fee inflation (%)',
+    qfinal: 'COLD-LIGHT ANSWER (no salesperson scenario)',
+    qnotes: 'Open notes'
+  };
+
+  let out = 'VACATION OWNERSHIP DECISION WORKSHEET — SUMMARY\n';
+  out += '================================================\n\n';
+  out += 'BASELINE CONTEXT:\n';
+  out += '- Ocean Tower, Big Island Hawaii\n';
+  out += '- 7,860 points EOY\n';
+  out += '- Current annual: $1,840 maintenance + $340 club = $2,180\n';
+  out += '- Usage: typically 1 family + 1 couples trip/year\n';
+  out += '- Hawaii is #1 destination; occasional NY/MA\n';
+  out += '- Kids: 19, 16, 12\n\n';
+
+  out += 'RESPONSES:\n';
+  out += '----------\n';
+  Object.entries(labels).forEach(([key, label]) => {
+    const v = state[key];
+    if (v === undefined || v === '' || v === null || (Array.isArray(v) && v.length === 0)) {
+      out += `${label}: [not answered]\n`;
+    } else {
+      out += `${label}: ${Array.isArray(v) ? v.join(', ') : v}\n`;
+    }
+  });
+
+  // Math
+  const cost = parseFloat(state.q10_cost) || 0;
+  const newFee = parseFloat(state.q10_newfee) || 0;
+  const years = parseFloat(state.q10_years) || 15;
+  const infl = (parseFloat(state.q10_infl) || 5) / 100;
+  const curMaint = parseFloat(state.q4_1) || 1840;
+  const curClub = parseFloat(state.q4_2) || 340;
+  const currentAnnual = curMaint + curClub;
+
+  let lifeFees = 0;
+  for (let y = 0; y < years; y++) lifeFees += newFee * Math.pow(1 + infl, y);
+  const total = lifeFees + cost;
+
+  let opp = 0;
+  if (cost > 0) {
+    opp += cost * Math.pow(1.07, years);
+    const diff = newFee - currentAnnual;
+    if (diff > 0) {
+      for (let y = 0; y < years; y++) {
+        opp += diff * Math.pow(1 + infl, y) * Math.pow(1.07, years - y);
+      }
+    }
+  }
+
+  out += '\nMATH SUMMARY:\n';
+  out += '-------------\n';
+  out += `Current annual cost: $${Math.round(currentAnnual).toLocaleString()}\n`;
+  if (newFee > 0) {
+    out += `Proposed annual cost (yr 1): $${Math.round(newFee).toLocaleString()}\n`;
+    out += `Annual increase: $${Math.round(newFee - currentAnnual).toLocaleString()}\n`;
+    out += `Lifetime fees over ${years} yrs (w/ ${(infl*100).toFixed(1)}% inflation): $${Math.round(lifeFees).toLocaleString()}\n`;
+  }
+  if (cost > 0) {
+    out += `Upfront cost: $${Math.round(cost).toLocaleString()}\n`;
+    out += `TOTAL lifetime cost of decision: $${Math.round(total).toLocaleString()}\n`;
+    out += `Opportunity cost @ 7% if invested instead: $${Math.round(opp).toLocaleString()}\n`;
+  }
+
+  const scoreNum = document.getElementById('scoreNum').textContent;
+  const scoreLabel = document.getElementById('scoreLabel').textContent;
+  out += `\nDECISION SIGNAL: ${scoreNum} — ${scoreLabel}\n`;
+
+  out += '\n---\nPlease analyze this worksheet honestly. Identify financial risks, emotional traps, and the strongest case both for and against the purchase. Be direct, not diplomatic.\n';
+
+  return out;
+}
+
+function showSummary() {
+  document.getElementById('summaryText').textContent = buildSummary();
+  document.getElementById('modalBg').classList.add('show');
+}
+
+function closeModal() {
+  document.getElementById('modalBg').classList.remove('show');
+}
+
+function copySummary() {
+  const text = buildSummary();
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(() => showToast('Copied to clipboard'));
+  } else {
+    // Fallback
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    showToast('Copied');
+  }
+}
+
+function downloadJSON() {
+  const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  const stamp = new Date().toISOString().slice(0,10);
+  a.download = `vacation-decision-${stamp}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast('JSON downloaded');
+}
+
+// ---- INIT ----
+loadData();
+calcMath();
+updateProgress();
+updateScore();
+</script>
+</body>
+</html>
